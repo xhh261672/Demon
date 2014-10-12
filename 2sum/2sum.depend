@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1407247842 source:d:\material\c++\leetcode\2sum\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+
