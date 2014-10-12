@@ -1,1 +1,5 @@
 !*.cpp
+*.cbp
+*.layout
+*.exe
+*.o
