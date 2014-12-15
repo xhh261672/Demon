@@ -65,24 +65,19 @@ public:
         if (headA == NULL || headB == NULL)
             return NULL;
         ListNode *curA = headA, *curB = headB;
-        while (curA && curB){
-
-            if (curA == curB)
-                return curA;
-            if ((curA->next == NULL) && (curB->next == NULL))
-                return NULL;
+        while (curA && curB && curA != curB){ // curA != curB 对应只有一个元素的case
 
             curA = curA->next;
             curB = curB->next;
 
-            if (curA == NULL)
-                curA = headB;
-            if (curB = NULL)
-                curB = headA;
+            if(curA == curB)
+                return curA;
+
+            if (curA == NULL) curA = headB;
+            if (curB == NULL) curB = headA;
 
         }
-        return headA;
-
+        return curA;
     }
 };
 int main()
