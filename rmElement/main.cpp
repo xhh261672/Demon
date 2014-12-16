@@ -5,30 +5,13 @@ using namespace std;
 class Solution {
 public:
     int removeElement(int A[], int n, int elem) {
-        int counter = 0;
-        int *B = new int[n];
-        memset(B, 0, n);
-        for (int i = 0, j = 0; i < n;){
-            if (A[i] == elem)
-            {
-                i++;
-                continue;
-            }
-            else
-            {
-                B[j] = A[i];
-                i++,j++;
-                counter ++;
-            }
-        }
-        int n2 = n - counter;
+        int j= 0;
         for (int i = 0; i < n; i++){
-            if (i < n2)
-                A[i] = B[i];
-            else
-                A[i] = 0;
+            A[j] = A[i];
+            if (A[i] != elem)
+                j++;
         }
-        return n2;
+        return j;
     }
 };
 
