@@ -2,48 +2,47 @@
 
 using namespace std;
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+  };
+
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ };
+
 class Solution {
 public:
+    ListNode *listnode;
     TreeNode *sortedListToBST(ListNode *head) {
-        if (head == NULL)
-            return NULL;
-        ListNode *listnode = head;
-        TreeNode *root = new TreeNode(head.val);
-        //TreeNode *treenode = root;
-        //treenode->val = head->val;
-        while (listnode){
-            insertInto(root, listnode);
-            listnode = listnode->next;
+        this->listnode = head;
+        int len = 0;
+        ListNode *node = head;
+        while (node){
+            len ++;
+            node = node->next;
         }
-        return root;
+        return insertInto(len);
     }
 
-    void insertInto(TreeNode *root, ListNode *listnode){
-        if (root == NULL){
-            root = new TreeNode(listnode->val);
-            root->left = root->right = NULL;
+    TreeNode *insertInto(int n){
+        if (n == 0){
+            return NULL;
         }
-        if (listnode->val < root->val)
-            insertInto(root->left, listnode);
-        else
-            insertInto(root->right, listnode);
+        TreeNode *temproot = new TreeNode(0);
+        temproot->left = insertInto(n/2);
+
+        temproot->val = listnode->val;
+        listnode = listnode->next;
+
+        temproot->right = insertInto(n-n/2 - 1);
+
+        return temproot;
     }
 };
 
