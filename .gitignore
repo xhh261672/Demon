@@ -3,3 +3,5 @@
 *.layout
 *.exe
 *.o
+/bin/
+*.class
