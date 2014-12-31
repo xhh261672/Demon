@@ -1,6 +1,7 @@
 public class Solution {
 	public int atoi(String str) {
-		str = str.replace(" ", "");
+		//str = str.replace(" ", "");
+		str = str.trim();
 		int op = 1;
 		int i = 0;
 		if (str.length() != 0) {
@@ -19,11 +20,11 @@ public class Solution {
 				char c = str.charAt(i);
 				if (Character.isDigit(c)) {
 					digits[j] = c;
-					// System.out.println(digits[j]);
+					//System.out.println(digits[j]);
 				} else
 					break;
 			}
-			int result = 0;
+			long result = 0;
 			if (digits.length != 0) {
 				int high = j - 1;
 				for (int k = 0; k < j; k++) {
@@ -31,9 +32,16 @@ public class Solution {
 					//System.out.println(digits[k]);
 					result = result + digit
 							* ((int) java.lang.Math.pow(10.0, high));
+					
 					high--;
 				}
-				return result * op;
+				result = result * op;
+				if (result > Integer.MAX_VALUE)
+					return Integer.MAX_VALUE;
+				if (result < Integer.MIN_VALUE)
+					return Integer.MIN_VALUE;
+				
+				return (int)result;
 			}
 		}
 
@@ -43,6 +51,7 @@ public class Solution {
 
 	public static void main(String[] args) {
 		Solution solution = new Solution();
-		System.out.print(solution.atoi("+1"));
+		//System.out.println(Integer.MIN_VALUE);
+		System.out.print(solution.atoi("-1"));
 	}
 }
