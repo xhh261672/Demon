@@ -26,15 +26,30 @@ public class Solution {
 	        	
 	        }
 	        if (l1 == null && l2 == null){
-	        	//result = null;
+	        	if (inc != 0){
+	        		result.next = new ListNode(0);
+	        		result.next.val = inc;
+	        	}
 	        	return head.next;
 	        }else if (l1 == null){
-	        	result.next = l2;
-	        	//result.val = l2.val + inc;
+	        	//System.out.println("l1 null");
+	        	while (l2 != null){
+	        		result.next = new ListNode((l2.val + inc)%10);
+	        		inc = (l2.val + inc)/10;
+	        		l2 = l2.next;
+	        		result = result.next;
+	        	}
+	        		        	
 	        }else if (l2 == null){	
-	        	result.next= l1;
-//	        	result.val = l1.val + inc;
+	        	while (l1 != null){
+	        		result.next = new ListNode((l1.val + inc)%10);
+	        		inc = (l2.val + inc)/10;
+	        		l1 = l1.next;
+	        		result = result.next;
+	        	}
 	        }
+	        if (inc != 0)
+	        	result.next = new ListNode(inc);
 	        
 	        return head.next;
 	 }
@@ -78,9 +93,11 @@ public class Solution {
 //    }
 	 public static void main(String[] args){
 		 Solution solution = new Solution();
-		 ListNode l1 = new ListNode(0);
-		 ListNode l2 = new ListNode(0);
+		 ListNode l1 = new ListNode(1);
+		 ListNode l2 = new ListNode(9);
+		 l2.next = new ListNode(9);
 		 ListNode result = solution.addTwoNumbers(l1, l2);
-		 System.out.print(result.val + "-" + result.next);
+		 //while (result != null)
+			 //System.out.print(result.val + "-");result = result.next;
 	 }
 }
