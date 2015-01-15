@@ -1,4 +1,5 @@
 !*.cpp
+!*.java
 *.cbp
 *.layout
 *.exe
@@ -6,3 +7,5 @@
 /bin/
 *.class
 */.settings/
+*.iml
+*.xml
