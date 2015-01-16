@@ -4,3 +4,4 @@ select Ex.Name from Employee E, Employee Ex where E.Id = Ex.ManagerId and Ex.Sal
 
 ##Combine Two Tables:
 
+select FirstName, LastName, City, State from Person left join Address on Person.PersonId = Address.PersonId;
