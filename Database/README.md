@@ -15,12 +15,15 @@ select (select distinct Salary from Employee order by Salary desc limit 1,1);
 
 ##Nth Highest Salary:
 
-CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
-BEGIN
-DECLARE M INT;
-SET M = N-1;
-  RETURN (
-      #### Write your MySQL query statement below.
-      select (select distinct Salary from Employee order by Salary desc limit M, 1)
-  );
-END
+    CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+    BEGIN
+    DECLARE M INT;
+    SET M = N-1;
+      RETURN (
+          #### Write your MySQL query statement below.
+          select (select distinct Salary from Employee order by Salary desc limit M, 1)
+      );
+    END
+
+##Rank Scores: 
+
