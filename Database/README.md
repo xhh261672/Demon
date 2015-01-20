@@ -1,15 +1,16 @@
 ##Employees Earning More Than Their Managers:
 
-select Ex.Name from Employee E, Employee Ex where E.Id = Ex.ManagerId and Ex.Salary > E.Salary;
+    select Ex.Name from Employee E, Employee Ex where E.Id = Ex.ManagerId and Ex.Salary > E.Salary;
 
 ##Combine Two Tables:
 
-select FirstName, LastName, City, State from Person left join Address on Person.PersonId = Address.PersonId;
+    select FirstName, LastName, City, State from Person left join Address on Person.PersonId = Address.PersonId;
 
 ##Second Highest Salary
 
-select max(Salary) from Employee where Salary < (select max(Salary) from Employee);
-select (select distinct Salary from Employee order by Salary desc limit 1,1);
+    select max(Salary) from Employee where Salary < (select max(Salary) from Employee);
+
+    select (select distinct Salary from Employee order by Salary desc limit 1,1);
 
 ###不写distinct的后果：重复的记录会计入排名 如 100 200 200 正确结果100 实际输出200
 
@@ -26,4 +27,10 @@ select (select distinct Salary from Employee order by Salary desc limit 1,1);
     END
 
 ##Rank Scores: 
-
+    select Scores.Score, count(Ranking.Score) as Rank 
+    from Scores, (select distinct Score from Scores order by Score desc) as Ranking 
+    where Ranking.Score >= Scores.Score  group by Scores.Id order by Scores.Score desc;
+    #Ranking排不排序是一样的 =.=
+    select Scores.Score, count(Ranking.Score) as Rank 
+    from Scores, (select distinct Score from Scores) as Ranking 
+    where Ranking.Score >= Scores.Score  group by Scores.Id order by Scores.Score desc;
