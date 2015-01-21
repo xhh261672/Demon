@@ -34,3 +34,10 @@
     select Scores.Score, count(Ranking.Score) as Rank 
     from Scores, (select distinct Score from Scores) as Ranking 
     where Ranking.Score >= Scores.Score  group by Scores.Id order by Scores.Score desc;
+
+
+##Consecutive Numbers:
+
+    select distinct a.Num from Logs a, Logs b, Logs c 
+    where a.Num = b.Num and b.Id = a.Id + 1 
+    and b.Num = c.Num and c.Id = b.Id + 1;
