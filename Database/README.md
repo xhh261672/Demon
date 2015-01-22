@@ -44,4 +44,11 @@
 
 ##Duplicate Emails:
     select Email from (select Email, count(Email) as num from Person group by Email) as N where N.num >=2;
-    select Email from Person group by Email having count(Email) > 1; 
+
+    select Email from Person group by Email having count(Email) > 1;
+
+    select distinct a.Email from Person a left join (select Id, Email from Person group by Email) as b
+    on a.Id = b.Id and a.Email = b.Email where b.Email is null; 
+
+    left join 只管a表，b表里group by Email 会把重复的Email的Id归入第一次出现的Id，因此a表里那些存在重复
+    Email的Id在left join时会找不到b表里相应的Id，那么对应Email就会成为NULL，得以筛选
