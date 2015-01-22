@@ -41,3 +41,7 @@
     select distinct a.Num from Logs a, Logs b, Logs c 
     where a.Num = b.Num and b.Id = a.Id + 1 
     and b.Num = c.Num and c.Id = b.Id + 1;
+
+##Duplicate Emails:
+    select Email from (select Email, count(Email) as num from Person group by Email) as N where N.num >=2;
+    select Email from Person group by Email having count(Email) > 1; 
