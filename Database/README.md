@@ -52,3 +52,12 @@
 
     left join 只管a表，b表里group by Email 会把重复的Email的Id归入第一次出现的Id，因此a表里那些存在重复
     Email的Id在left join时会找不到b表里相应的Id，那么对应Email就会成为NULL，得以筛选
+
+
+##Customers Who Never Order:
+
+    select Name from Customers, Orders where Customers.Id not in 
+    (select Customers.Id from Customers, Orders where Orders.CustomerId = Customers.Id);
+    (Time Limit Exceeded..)
+
+    select Name from Customers where Id not in (select CustomerId from Orders);
