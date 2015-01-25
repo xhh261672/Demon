@@ -61,3 +61,12 @@
     (Time Limit Exceeded..)
 
     select Name from Customers where Id not in (select CustomerId from Orders);
+
+##Department Highest Salary:
+
+    select D.Name as Department, E.Name as Employee, E.Salary as Salary
+    from  Department D, Employee E, (select DepartmentId, max(Salary) as Highest from Employee group by DepartmentId) as temp
+    where D.Id = E.DepartmentId
+    and E.DepartmentId = temp.DepartmentId
+    and E.Salary = temp.Highest;
+    
