@@ -9,10 +9,85 @@ public class Solution {
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null)
             return head;
-        createMaxHeap(head);
-        return heapSort(nodeList);
+//        createMaxHeap(head);
+//        return heapSort(nodeList);
+
+        final ListNode topHead = new ListNode(0);
+        final ListNode bottomHead = new ListNode(0);
+
+        ListNode top = topHead;
+        ListNode bottom = bottomHead;
+        ListNode cur = head;
+        for (; cur != null && cur.next != null; cur = cur.next){
+            top.next = cur;
+            top = top.next;
+
+            cur = cur.next;
+
+            bottom.next = cur;
+            bottom = bottom.next;
+        }
+
+        top.next = cur;
+        bottom.next = null;
+
+        for (int i = 1; bottomHead.next != null; i <<= 1){
+            top = topHead;
+            bottom = bottomHead;
+
+            while(top.next != null && bottom.next != null){
+                top = merge(top, bottom, i<<1);
+                bottom = merge(bottom, top, i<<1);
+            }
+        }
+        return topHead.next;
     }
 
+    private ListNode merge(ListNode dest, ListNode src, int step){
+        int destNum = 0;
+        int srcNum = 0;
+        final int max = step >>> 1;
+
+        for (int j = 0; j < step; j ++ ){
+
+            if (dest.next == null || destNum >= max){
+                if (src.next == null)
+                    break;
+                else{
+                    final ListNode temp = dest.next;
+                    dest.next = src.next;
+                    src.next = src.next.next;
+                    dest = dest.next;
+                    dest.next = temp;
+                    //destNum ++;
+                }
+            }else if (src.next == null || srcNum >= max){
+                if (dest.next != null){
+                    dest = dest.next;
+                }
+
+            }else{
+                if (dest.next.val <= src.next.val){
+                    dest = dest.next;
+                    destNum ++;
+                }else{
+                    final ListNode temp = dest.next;
+                    dest.next = src.next;
+                    src.next = src.next.next;
+                    dest = dest.next;
+                    dest.next = temp;
+                    srcNum ++;
+                }
+
+            }
+
+        }
+        return dest;
+    }
+
+
+
+//TLE-relative heap sort
     public void createMaxHeap(ListNode head){
         ListNode cur = head;
         while (cur!=null){
