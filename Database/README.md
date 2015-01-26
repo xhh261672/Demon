@@ -70,3 +70,11 @@
     and E.DepartmentId = temp.DepartmentId
     and E.Salary = temp.Highest;
     
+
+##Department Top Three Salaries:
+
+    select D.Name as Department, E.Name as Employee, E.Salary as Salary
+    from Department D, Employee E 
+    where (select count(distinct(Salary)) from Employee where DepartmentId = E.DepartmentId and Salary > E.Salary) < 3
+    and E.DepartmentId = D.Id
+    order by E.DepartmentId, E.Salary desc;
