@@ -12,37 +12,79 @@ public class Solution {
 //        createMaxHeap(head);
 //        return heapSort(nodeList);
 
-        final ListNode topHead = new ListNode(0);
-        final ListNode bottomHead = new ListNode(0);
+//        final ListNode topHead = new ListNode(0);
+//        final ListNode bottomHead = new ListNode(0);
+//
+//        ListNode top = topHead;
+//        ListNode bottom = bottomHead;
+//        ListNode cur = head;
+//        for (; cur != null && cur.next != null; cur = cur.next){
+//            top.next = cur;
+//            top = top.next;
+//
+//            cur = cur.next;
+//
+//            bottom.next = cur;
+//            bottom = bottom.next;
+//        }
+//
+//        top.next = cur;
+//        bottom.next = null;
+//
+//        for (int i = 1; bottomHead.next != null; i <<= 1){
+//            top = topHead;
+//            bottom = bottomHead;
+//
+//            while(top.next != null && bottom.next != null){
+//                top = merge(top, bottom, i<<1);
+//                bottom = merge(bottom, top, i<<1);
+//            }
+//        }
+//        return topHead.next;
 
-        ListNode top = topHead;
-        ListNode bottom = bottomHead;
-        ListNode cur = head;
-        for (; cur != null && cur.next != null; cur = cur.next){
-            top.next = cur;
-            top = top.next;
-
-            cur = cur.next;
-
-            bottom.next = cur;
-            bottom = bottom.next;
+        ListNode slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
+        ListNode l1 = head;
+        ListNode l2 = slow.next;
+        slow.next = null;
+        l1 = sortList(l1);
+        l2 = sortList(l2);
 
-        top.next = cur;
-        bottom.next = null;
-
-        for (int i = 1; bottomHead.next != null; i <<= 1){
-            top = topHead;
-            bottom = bottomHead;
-
-            while(top.next != null && bottom.next != null){
-                top = merge(top, bottom, i<<1);
-                bottom = merge(bottom, top, i<<1);
-            }
-        }
-        return topHead.next;
+        return mergeSort(l1, l2);
     }
 
+// recursive merge
+
+    private ListNode mergeSort(ListNode l1, ListNode l2){
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        ListNode newHead = new ListNode(0);
+        ListNode newNode = newHead;
+
+        while (l1 != null && l2 != null){
+            if (l1.val > l2.val){
+                newNode.next = l2;
+                l2 = l2.next;
+            }else{
+                newNode.next = l1;
+                l1 = l1.next;
+            }
+            newNode = newNode.next;
+        }
+
+        if (l1 != null) newNode.next = l1;
+        else if (l2 != null) newNode.next = l2;
+
+        return newHead.next;
+    }
+
+
+
+// iterative merge sort
     private ListNode merge(ListNode dest, ListNode src, int step){
         int destNum = 0;
         int srcNum = 0;
