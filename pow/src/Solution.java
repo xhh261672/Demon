@@ -14,4 +14,5 @@ public class Solution {
 
         return (n%2 == 0)? pow(x*x, n/2): x*pow(x*x, n/2);
     }
+
 }
