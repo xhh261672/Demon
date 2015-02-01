@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -6,18 +7,21 @@ import java.util.List;
 public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         int m = triangle.size();
-        int sum = triangle.get(0).get(0), idx = 0;
-        for (int i = 0; i < m; i++){
-             if ((i+1) < m){
-                 if (triangle.get(i+1).get(idx) <= triangle.get(i+1).get(idx+1))
-                     sum += triangle.get(i+1).get(idx);
-                 else{
-                     idx ++;
-                     sum += triangle.get(i+1).get(idx);
-                 }
-             }else
-                 break;
+
+        for (int i = 1; i < m; i++){
+             int n = triangle.get(i).size();
+            for (int j = 0; j < n; j++){
+                if (j == 0)
+                    triangle.get(i).set(j, triangle.get(i).get(j)+triangle.get(i-1).get(j));
+                else if (j == n - 1)
+                    triangle.get(i).set(j, triangle.get(i).get(j)+triangle.get(i-1).get(j-1));
+                else{
+                    int pre = triangle.get(i-1).get(j) > triangle.get(i-1).get(j-1) ? triangle.get(i-1).get(j-1): triangle.get(i-1).get(j);
+                    triangle.get(i).set(j, triangle.get(i).get(j) + pre);
+                }
+            }
         }
-        return sum;
+        int re = Collections.min(triangle.get(m-1));
+        return re;
     }
 }
