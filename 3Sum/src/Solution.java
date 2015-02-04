@@ -8,7 +8,7 @@ import java.util.List;
 public class Solution {
     public List<List<Integer>> threeSum(int[] num) {
         Arrays.sort(num);
-        if (num.length != 0 && num[0] >= 0) return null;
+        // if (num.length != 0 && num[0] >= 0) return null;
 
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
