@@ -31,4 +31,35 @@ public class Solution {
         }
         return re;
     }
+
+    public int[] plusOne2(int[] digits){
+        if (digits == null) return null;
+
+        int size = digits.length;
+        int t = 0;
+        for (int i = size-1; i >= 0; i--){
+            if (digits[i] == 9){
+                digits[i] = 0; t = 1;
+            }
+            else {
+                t = 0; digits[i]++;
+            }
+            if (t == 0) return digits;
+        }
+        if (t == 1)
+            size ++;
+        int []re = new int [size];
+        re[0] = 1;
+
+        for (int i = 0; i < size-1; i++)
+            re[i+1] = digits[i];
+        return re;
+    }
+
+    public static void main(String []args){
+        Solution solution = new Solution();
+        int []a = {9};
+        solution.plusOne2(a);
+    }
+
 }
