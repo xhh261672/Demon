@@ -36,4 +36,21 @@ public class Solution {
         }
         return false;
     }
+
+    public boolean searchMatrix2(int [][]matrix, int target){
+        int r = matrix.length, c = matrix[0].length;
+        int left = 0, right = r*c-1;
+        int m = (left + right) / 2;
+
+        while (left <= right){
+            int value = matrix[m/c][m%c];
+            if (value == target) return true;
+            else if (target >= value) right = m - 1;
+            else left = m+1;
+            m = (left+right)/2;
+        }
+
+        return false;
+    }
+
 }
