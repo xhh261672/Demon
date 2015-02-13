@@ -46,4 +46,35 @@ public class Solution {
         Collections.reverse(re);
         return re;
     }
+
+    public List<List<Integer>> levelOrderBottom2(TreeNode root){
+        LinkedList<List<Integer>> re = new LinkedList<List<Integer>>();
+        if (root == null) return re;
+
+        List<TreeNode> temp = new ArrayList<TreeNode>();
+
+        temp.add(root);
+        while (true){
+            System.out.println(re);
+            if (temp == null || temp.isEmpty()) return re;
+            List<Integer> list = new ArrayList<Integer>();
+            List<TreeNode> next = new ArrayList<TreeNode>();
+            for (TreeNode iter : temp){
+                list.add(iter.val);
+                if (iter.left != null) next.add(iter.left);
+                if (iter.right != null) next.add(iter.right);
+            }
+            re.addFirst(list); // List<E> interface donot have addFirst() method
+//            list.clear(); //不要clear 这里一clear re里面的也被清了 引用？
+
+            temp = next;
+        }
+    }
+
+    public static void main(String []args){
+        Solution solution = new Solution();
+        TreeNode root = new TreeNode(1);
+        List<List<Integer>> re = solution.levelOrderBottom2(root);
+//        System.out.println(re);
+    }
 }
