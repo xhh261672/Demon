@@ -16,12 +16,16 @@ public class Solution {
         int n = arr.length;
         if (n < 2) return;
         int i = 0, j = 1;
-        while (j < n){
-            if (arr[i]%2 == 1 && arr[j]%2 == 0){
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                i += 2; j += 2;
+        while (i < n && j < n){
+//            System.out.println(i + " " + j);
+            if (arr[i] % 2== 0) i+= 2;
+            if (arr[j] % 2 == 1) j += 2;
+            if (i < n && j < n){
+                if (arr[i]%2 == 1 && arr[j]%2 == 0){
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
             }
         }
 //        System.out.println(j);
@@ -56,11 +60,50 @@ public class Solution {
     }
 
 
+    private static int x = 100;
+
+    public static int aMethod(int i)throws Exception
+    {
+        try{
+            return i / 10;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("exception in a Method");
+        } finally{
+            System.out.printf("finally");
+        }
+    }
 
     public static void main(String []args){
-        int []arr = {1,9,1};
-        Solution solution = new Solution();
-        int val = solution.getWinValue(arr);
-        System.out.println(val);
+//        int []arr = {1,2,3,4,5};
+//        Solution solution = new Solution();
+//        solution.oddInOddEvenInEven(arr);
+//        System.out.println(val);
+        Integer i01 = 59;
+        int i02 = 59;
+        Integer i03 =Integer.valueOf(59);
+        Integer i04 = new Integer(59);
+
+//        System.out.println(i04 == i03);
+
+        Solution hs1=new Solution();
+        hs1.x++;
+        Solution  hs2=new Solution();
+        hs2.x++;
+        hs1=new Solution();
+        hs1.x++;
+        Solution.x--;
+//        System.out.println("x="+x);
+
+        try
+        {
+            aMethod(0);
+        }
+        catch (Exception ex)
+        {
+            System.out.printf("exception in main");
+        }
+        System.out.printf("finished");
     }
 }
