@@ -51,9 +51,18 @@ class TreeNode {
      }
 
      public  static void main(String []args) {
-         Solution solution = new Solution();
-         TreeNode root = new TreeNode(1);
-         root.left = new TreeNode(2);
-         solution.hasPathSum(root, 0);
+//         Solution solution = new Solution();
+//         TreeNode root = new TreeNode(1);
+//         root.left = new TreeNode(2);
+//         solution.hasPathSum(root, 0);
+
+         int x = 0, y = 0;
+         int cnt = 0;
+         for (int i = 0; i < 500; i++){
+             x = i%6 + 1;
+             y = i%8 + 1;
+             if (x==y) cnt++;
+         }
+         System.out.print(cnt);
      }
  }
