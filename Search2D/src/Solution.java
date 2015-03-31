@@ -45,8 +45,8 @@ public class Solution {
         while (left <= right){
             int value = matrix[m/c][m%c];
             if (value == target) return true;
-            else if (target >= value) right = m - 1;
-            else left = m+1;
+            else if (target >= value) left = m + 1;
+            else right = m-1;
             m = (left+right)/2;
         }
 
