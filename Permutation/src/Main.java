@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import  java.util.List;
+/**
+ * Created by Administrator on 2015/4/1.
+ */
+public class Main {
+    private static List<List<Integer>> permList = new ArrayList<List<Integer>>();
+    public void permGen(Integer []arr, int k, int n){
+        if (k == n-1){
+            List<Integer> temp = new ArrayList<Integer>(Arrays.asList(arr));
+            permList.add(temp);
+            return;
+        }else{
+            for (int i = k; i < n; i++){
+                int t = arr[k];
+                arr[k] = arr[i];
+                arr[i] = t;
+                permGen(arr, k+1, n);
+                t = arr[k];
+                arr[k] = arr[i];
+                arr[i] = t;
+            }
+        }
+    }
+
+    public static void main(String []args){
+        Main m = new Main();
+//        List<Integer> temp  = new ArrayList<Integer>();
+//        Integer[] a = {1,2,3};
+//        m.permGen(a, 0, 3);
+//        System.out.print(permList);
+        int []num = {1,5,1};
+        m.nextPermutation(num);
+//        System.out.print(num);
+    }
+
+    public void nextPermutation(int[] num) {
+        int l = num.length;
+        if (l == 1) return;
+        int i = l-2, j = l-1, k = l-1;
+        for (; i >= 0;i--, j--){
+            if (num[i] < num[j])
+                break;
+        }
+        if (i < 0){
+            reverse(num, 0, num.length-1);
+            return;
+        }
+        while (num[k] <= num[i])// 不能写< 要找的是比num[i]大的数字
+            k--;
+        int t = num[k];
+        num[k] = num[i];
+        num[i] = t;
+        System.out.print(i+" "+j+" "+k);
+        reverse(num, j, num.length-1);
+    }
+    public void reverse(int[] a, int l, int r){
+
+        while (l < r){
+            int t = a[l];
+            a[l] = a[r];
+            a[r] = t;
+            l++; r--;
+        }
+    }
+}
