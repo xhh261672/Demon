@@ -10,7 +10,7 @@ public class Main {
             int m = scanner.nextInt();
             int n = scanner.nextInt();
             int t = scanner.nextInt();
-
+            if (m == 0 || n == 0) return;
             int [][]a = new int[m][n];
             for (int i = 0; i < m; i++){
                 for (int j = 0; j < n;j++){
