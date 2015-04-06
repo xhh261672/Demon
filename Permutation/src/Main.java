@@ -24,16 +24,46 @@ public class Main {
         }
     }
 
+    private void getPerm(int []a, int k, int n){
+
+        if (k == n-1){
+            List<Integer> temp = new ArrayList<Integer>();
+            for (int i = 0; i < n; i++){
+                temp.add(a[i]);
+            }
+            System.out.println(temp);
+            permList.add(temp);
+//
+            return;
+        }else{
+            for (int i = k; i < n; i++){
+                int t = a[k];
+                a[k] = a[i]; a[i] = t;
+                getPerm(a, k+1, n);
+                t = a[k]; a[k] = a[i]; a[i] = t;
+            }
+        }
+    }
+    public List<List<Integer>> permute(int[] num) {
+        getPerm(num, 0, num.length);
+        return permList;
+    }
+
     public static void main(String []args){
+        System.out.println(permList);
         Main m = new Main();
+        m.permute(new int[]{0,1});
+        System.out.println(permList);
 //        List<Integer> temp  = new ArrayList<Integer>();
 //        Integer[] a = {1,2,3};
 //        m.permGen(a, 0, 3);
 //        System.out.print(permList);
-        int []num = {1,5,1};
-        m.nextPermutation(num);
+//        int []num = {1,5,1};
+//        m.nextPermutation(num);
 //        System.out.print(num);
     }
+
+
 
     public void nextPermutation(int[] num) {
         int l = num.length;
