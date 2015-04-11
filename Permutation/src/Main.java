@@ -31,7 +31,7 @@ public class Main {
             for (int i = 0; i < n; i++){
                 temp.add(a[i]);
             }
-            System.out.println(temp);
+//            System.out.println(temp);
             permList.add(temp);
 //
             return;
@@ -45,14 +45,35 @@ public class Main {
         }
     }
     public List<List<Integer>> permute(int[] num) {
-        getPerm(num, 0, num.length);
+//        getPerm(num, 0, num.length);
+        permute(num, 0);
         return permList;
+    }
+
+
+    public void permute(int[] num, int idx){
+        for(int i = idx; i < num.length; i++){
+            int temp = num[i]; num[i] = num[idx]; num[idx] = temp;
+            permute(num, idx+1);
+            temp = num[i]; num[i] = num[idx]; num[idx] = temp;
+        }
+        if (idx == num.length -1){
+            permList.add(convert(num));
+        }
+    }
+
+    public List<Integer> convert(int[] num){
+        List<Integer> res = new ArrayList<Integer>();
+        for(int i=0;i<num.length;i++){
+            res.add(num[i]);
+        }
+        return res;
     }
 
     public static void main(String []args){
         System.out.println(permList);
         Main m = new Main();
-        m.permute(new int[]{0,1});
+        m.permute(new int[]{0, 1});
         System.out.println(permList);
 //        List<Integer> temp  = new ArrayList<Integer>();
 //        Integer[] a = {1,2,3};
