@@ -45,8 +45,9 @@ public class Main {
         }
     }
     public List<List<Integer>> permute(int[] num) {
-//        getPerm(num, 0, num.length);
-        permute(num, 0);
+        permList.clear();
+        getPerm(num, 0, num.length);
+
         return permList;
     }
 
