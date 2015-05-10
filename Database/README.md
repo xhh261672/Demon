@@ -80,3 +80,17 @@
     order by E.DepartmentId, E.Salary desc;
 
     select count(distinct(Salary)) from Employee where DepartmentId = E.DepartmentId and Salary > E.Salary返回0 which i dont know why...
+
+## 查询每门课最高分
+
+	create table t1
+		(`cnum` int, `score` int)
+       ;
+       
+insert into t1
+(`cnum`, `score`)
+values
+(1, 85),(1, 90), (1, 34), (2, 34), (2, 85), (2, 60);
+
+
+select cnum, max(score) as ms from t1 group by cnum;
