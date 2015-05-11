@@ -14,4 +14,13 @@
 *.ncb
 *.vcproj
 *.user
-*/Debug/
+*.exe
+*.ilk
+*.pdb
+*.suo
+*.htm
+*.manifest
+*.obj
+*.dep
+*.idb
+*.pdb
