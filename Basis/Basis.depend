@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1431251463 source:d:\material\c++\leetcode\basis\main.cpp
+	<iostream>
+	<cstring>
+
+1431260896 source:d:\material\c++\leetcode\singleton\single.cpp
+	<iostream>
+
