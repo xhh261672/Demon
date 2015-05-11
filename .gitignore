@@ -10,3 +10,8 @@
 *.iml
 *.xml
 .idea/
+*.sln
+*.ncb
+*.vcproj
+*.user
+*/Debug/
