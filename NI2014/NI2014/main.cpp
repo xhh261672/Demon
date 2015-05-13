@@ -4,6 +4,7 @@
 #include <map>
 #include <windows.h>
 #include <cstdlib>
+#include <algorithm>
 using namespace std;
 
 void firstUniqueChar()
@@ -33,7 +34,37 @@ void firstUniqueChar()
 		cout<<s[min]<<endl;
 	}
 }
-
+void unique2(){
+	string s;
+	int cs[256];
+	bool re[256];
+	while (getline(cin, s)){
+		memset(cs, 0, sizeof(cs));
+		memset(re, false, sizeof(re));
+		
+		/*for (int i = 0; i < 256; i++)
+			cout<<cs[i];
+		cout<<endl;*/
+		for (int i = 0; i < s.size(); i++){
+			cs[s[i] - '0']++;
+			//cout<<cs[s[i]]<<endl;
+		}
+		for (int i = 0; i < 256; i++){
+			if (cs[i] == 1)
+				re[i] = true;
+		}
+		char c = '\0';
+		for (int i = 0; i < s.size(); i++){
+			if (re[s[i] - '0'] == true){
+				c = s[i];break;
+			}
+		}
+		if (c != '\0')
+			cout<<c<<endl;
+		else
+			cout<<"NULL"<<endl;
+	}
+}
 void spiral()
 {
 	int n;
@@ -72,12 +103,69 @@ void spiral()
 		delete[] m;
 	}
 }
+
+void addBigInt(){
+	string s1, s2;
+	while (cin>>s1>>s2){
+		//cout<<s1<<endl<<s2<<endl;
+		int l = max(s1.size(), s2.size()) + 1;
+		char *re = new char[l];
+		int remain = 0;
+		int m = s1.size()-1, n = s2.size()-1;
+		int i;
+		for (i = l-1; m>=0 && n>=0 && i >= 0; i--){
+			int s = s1[m]-'0'+s2[n]-'0'+remain;
+			if (s >=10 ){
+				s%=10;
+				remain = 1;
+			}else{
+				remain = 0;
+			}
+			re[i] = (char)('0'+s);
+			m--; n--;
+		}
+		while(m>=0){
+			int s = s1[m]-'0'+remain;
+			if (s >=10 ){
+				s%=10;
+				remain = 1;
+			}else{
+				remain = 0;
+			}
+			re[i] = (char)('0'+s);
+			m--;i--;
+		}
+		while(n>=0){
+			int s = s2[n]-'0'+remain;
+			if (s >=10 ){
+				s%=10;
+				remain = 1;
+			}else{
+				remain = 0;
+			}
+			re[i] = (char)('0'+s);
+			n--;i--;
+		}
+		int start = 1;
+		if (remain != 0){
+			re[0] = (char)(remain+'0');
+			start = 0;
+		}
+		//cout<<remain<<endl;
+		for (int j = start; j < l; j++)
+			cout<<re[j];
+		cout<<endl;
+
+	}
+}
 int main()
 {
-	//freopen("in.txt", "r", stdin);
+	freopen("in.txt", "r", stdin);
 	freopen("out.txt", "w", stdout);
 	//firstUniqueChar();
-	spiral();
+	//unique2();
+	//spiral();
+	addBigInt();
 	return 0;
 	
 }
