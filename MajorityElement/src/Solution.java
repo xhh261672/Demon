@@ -13,7 +13,13 @@ public class Solution {
                 count = 1;
             }
         }
-
+        System.out.println(majorityIndex);
         return nums[majorityIndex];
+    }
+
+    public static void main (String []args){
+        Solution solution = new Solution();
+        int []nums = {3,6,3,7,3,8,3,9,3,10,3};
+        System.out.println(solution.majorityElement(nums));
     }
 }
