@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -5,18 +6,40 @@ import java.util.Set;
  */
 public class Solution {
     public boolean wordBreak(String s, Set<String> wordDict) {
-        if (s == null || wordDict.isEmpty()) return false;
-        int i = 0, j = 0;
-        while (i < s.length()){
-            while (j+1 < s.length()){
-                if (wordDict.contains(s.substring(i, j+1))){
-                    i = j+1;
+//        if (s == null || wordDict.isEmpty()) return false;
+//        int i = 0, j = 0;
+//        while (i < s.length()){
+//            while (j+1 <= s.length()){
+//                if (wordDict.contains(s.substring(i, j+1))){
+//                    i = j+1;
+//                }
+//                j++;
+//            }
+//            i++;
+//        }
+//
+//        if (j >= s.length() && i < s.length()) return false;
+//        return true;
+
+        if (wordDict.isEmpty()) return false;
+        int len = s.length();
+        boolean []flag = new boolean[len+1];
+        flag[0] = true;
+
+        for (int i= 1; i < len+1; i++){
+            for (int j = 0; j<i; j++){
+                if (flag[j] && wordDict.contains(s.substring(j, i))){
+                    flag[i] = true; break;
                 }
-                j++;
             }
         }
+        return flag[len];
+    }
 
-        if (j >= s.length() && i < s.length()) return false;
-        return true;
+    public static void main (String []args){
+    	Solution solution = new Solution();
+    	Set set = new HashSet();
+    	set.add("a");
+    	solution.wordBreak("a", set);
     }
 }
